@@ -1,22 +1,17 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Card from 'react-bootstrap/Card';
-import './Login.css';
+import React from "react";
+import { Button } from "react-bootstrap";
+import "./Login.css";
+import { withAuth0 } from "@auth0/auth0-react";
 
 class Login extends React.Component {
+  componentDidMount() {
+    const { user } = this.props.auth0;
+    this.props.loginHandler(user);
+  }
   render() {
-    return(
-      <Card style={{ width: '18rem' }}>
-        <Card.Body>
-          <Card.Title>Log In</Card.Title>
-          <Card.Text>
-            Click Below to Log In
-          </Card.Text>
-          {/* TODO: add a `LoginButton` component here that will log the user in with Auth0 */}
-        </Card.Body>
-      </Card>
-    )
+    const { loginWithRedirect } = this.props.auth0;
+    return <Button onClick={() => loginWithRedirect()}>Log In</Button>;
   }
 }
 
-export default Login;
+export default withAuth0(Login);
