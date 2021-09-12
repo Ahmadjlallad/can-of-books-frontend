@@ -4,7 +4,6 @@ import IsLoadingAndError from "./IsLoadingAndError";
 import Footer from "./Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BestBooks from "./BestBooks";
-import Login from "./Login";
 import Profile from "./Profile";
 // import { withAuth0 } from "@auth0/auth0-react";
 import { Card } from "react-bootstrap";
