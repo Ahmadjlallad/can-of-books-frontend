@@ -10,14 +10,14 @@ class Header extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand>My Favorite Books</Navbar.Brand>
-        <div class="col">
+        <div className="col">
           <Link to="/">Home</Link>
         </div>{" "}
-        <div class="col">
+        <div className="col">
           <Link to="/profile">Profile</Link>
         </div>
         {/* TODO: if the user is logged in, render the `LogoutButton` - if the user is logged out, render the `LoginButton` */}
-        <div class="col">
+        <div className="col">
           <Link to="/">
             {this.props.user ? (
               <Logout />

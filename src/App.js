@@ -24,7 +24,7 @@ class App extends React.Component {
   };
   render() {
     // const { isAuthenticated } = this.props.auth0;
-    // console.log("app", this.props);
+    // console.log("app", this.state.user);
     return (
       <>
         <Router>
@@ -32,7 +32,11 @@ class App extends React.Component {
             <Header loginHandler={this.loginHandler} user={this.state.user} />
             <Switch>
               <Route exact path="/">
-                {this.state.user ? <BestBooks /> : this.didNotLogeInYet()}
+                {this.state.user ? (
+                  <BestBooks user={this.state.user} />
+                ) : (
+                  this.didNotLogeInYet()
+                )}
               </Route>
               <Route path="/profile">
                 {this.state.user ? (
