@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./BestBooks.css";
 import BookFormModal from "./BookFormModal";
+import UpdateBookForm from "./UpdateBookForm";
 import axios from "axios";
 import { Card, Button, Row, Col } from "react-bootstrap";
 class MyFavoriteBooks extends React.Component {
@@ -9,6 +10,7 @@ class MyFavoriteBooks extends React.Component {
 
   handleClose = () => this.setState({ addBooks: false });
   handleShow = () => this.setState({ addBooks: true });
+
   getData = async (email) => {
     try {
       const getUserFromDb = await axios.get(
@@ -43,6 +45,18 @@ class MyFavoriteBooks extends React.Component {
       console.log(err);
     }
   };
+
+  updateBook = async (id, body) => {
+    try {
+      await axios.put(
+        `https://canofbooksbackendexe.herokuapp.com/books/${id}`,
+        body
+      );
+      await this.getData(this.props.user.email);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   componentDidMount = () => {
     const { email } = this.props.user;
     this.getData(email);
@@ -57,9 +71,19 @@ class MyFavoriteBooks extends React.Component {
                   <Card.Title>book Title: {book.title}</Card.Title>
                   <Card.Text>description: {book.description}</Card.Text>
 
+                  <UpdateBookForm
+                    buttonLabel={"Update Book"}
+                    user={this.props.user}
+                    changeTitle={book.title}
+                    changeDec={book.description}
+                    selected={book.status}
+                    id={book._id}
+                    updateBook={this.updateBook}
+                  />
+
                   <Button
                     onClick={() => this.deleteBooks(book._id)}
-                    variant="primary"
+                    variant="danger"
                   >
                     Delete
                   </Button>
